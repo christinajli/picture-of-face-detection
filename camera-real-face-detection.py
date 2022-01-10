@@ -3,11 +3,6 @@ import numpy as np
 import glob
 import os
 
-### This program is an alternate solution to the problem of detecting if a face is real or in a picture
-### It opens the camera and attempts to match frontal and side profiles of face with the Haar Cascade algorithm  
-### If valid faces are found for all three, it determines the face is real and not a picture 
-### This does not account for three separate picture of faces in all three angles (left, center, and right)
-
 # delete previously saved images
 fileList = glob.glob('camera_*.jpeg')
 for file in fileList:
@@ -105,6 +100,6 @@ cam.release()
 cv2.destroyWindow(window_name)
 
 if os.path.isfile("camera_left.jpeg") and os.path.isfile("camera_center.jpeg") and os.path.isfile("camera_right.jpeg"):
-    print("The face is real and not a picture")
+    print("The face is real")
 else:
     print("Not enough data provided or the face is a picture")
