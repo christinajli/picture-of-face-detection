@@ -3,6 +3,9 @@ import os
 from matplotlib import pyplot as plt
 import numpy as np
 
+AVERGAE_ERROR_THRESHOLD = 100
+LOWE_MATCHES_THRESHOLD = 20
+RATIO_TEST_THRESHOLD = 0.8
 
 # Detect face region
 def get_face(img):
@@ -51,11 +54,10 @@ def matching(img_a, img_b):
     flann = cv2.FlannBasedMatcher()
     matches = flann.knnMatch(des_a, des_b, k=2)
     
-    threshold = 0.8
     filtered_matches=[]
     draw_matches = []
     for m, n in matches: 
-        if m.distance < threshold*n.distance:
+        if m.distance < RATIO_TEST_THRESHOLD*n.distance:
             filtered_matches.append(m)
             draw_matches.append([m])
     
@@ -79,8 +81,7 @@ def check_transformation(img_a, img_b):
     kp_ref, des_ref, kp_rot, des_rot, lowe_matches = matching(reference_img, test_img)
     
     # if not enough matches are found, no need to find homography matrix, return large value
-    # print(len(lowe_matches))
-    if (len(lowe_matches) < 50):
+    if (len(lowe_matches) < LOWE_MATCHES_THRESHOLD):
         return 10000
     
     ref_pts = np.float32(np.array([kp_ref[m.queryIdx].pt for m in lowe_matches]).reshape(-1,1,2))
@@ -99,7 +100,7 @@ def check_transformation(img_a, img_b):
     error_distance = error_distance/len(ref_pts[0])
     
     # uncomment to see error distance
-    print("error distance", error_distance)
+    # print("error distance", error_distance)
 
     return error_distance
 
@@ -107,10 +108,12 @@ def check_transformation(img_a, img_b):
 # Evaluation 
 def get_result(res1,res2,res3):
     average_error = (res1 + res2 + res3)/3
-    print ('avg error', average_error)
+
+    # uncomment to see average error for three comparisons
+    # print ('avg error', average_error)
     
-    # threshold for average error distance
-    if (average_error < 100):
+    # check threshold for average error distance
+    if (average_error < AVERGAE_ERROR_THRESHOLD):
         print("The face is a picture")
     else:
         print("The face is real")
