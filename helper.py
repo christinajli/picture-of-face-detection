@@ -25,13 +25,14 @@ def get_face(img):
         profile_face_cascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
         faces = profile_face_cascade.detectMultiScale(flipped, 1.1, 10)
 
-    # if still no face detected, then return original image
+    # extract the area of the face only
     if len(faces)!=0: 
         for (x,y,w,h) in faces:
             face_img = img[y:y+h, x:x+w]
             # uncomment to show detected face 
             # cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0),4)
     else:
+        # if still no face detected, then return original image
         return img
 
     # uncomment to show detected face
