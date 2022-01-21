@@ -25,11 +25,12 @@ The program requires the following to run:
 ## Result for solution #1
 A picture of a face is displayed on a tablet, and images are taken by facing the tablet to the center, right, and left of the camera. The faces are correctly identified by using Haar Cascade algorithm, and are enclosed in a blue rectangle.
 
-![Detected face center](/readme-imgs/detect_face_data_center.png)
-![Detected face right](/readme-imgs/detect_face_data_right.png)
-![Detected face left](/readme-imgs/detect_face_data_left.png)  
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/detect_face_data_center.png" width="250" height="250" />
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/detect_face_data_right.png" width="250" height="250" />
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/detect_face_data_left.png" width="250" height="250" />
 
 Keypoints from the faces are detected by the SIFT Detector, and the computed descriptors are passed to a FLANN based matcher. The following images show that featurs are being matched up from two detected face images. 
-![Matching face center and right](/readme-imgs/matching_center_right.png)
-![Matching face center and left](/readme-imgs/matching_center_left.png)
-![Matching face right and left](/readme-imgs/matching_right_left.png)
+
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/matching_center_right.png" width="250" height="250" />
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/matching_center_left.png" width="250" height="250" />
+<img src="https://github.com/christinajli/picture-of-face-detection/blob/master/readme-imgs/matching_right_left.png" width="250" height="250" />
